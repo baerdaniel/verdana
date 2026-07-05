@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>there was Verdana</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAC3ALcDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AIyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//9k=">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --link: #0000cc;
+    --visited: #551a8b;
+    --paper: #c0c0c0;
+    --field: #ffffff;
+    --line: #808080;
+    --hi: #ffffff;
+    --lo: #404040;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    overflow: hidden;
+  }
+
+  /* the window IS the resolution: 1024 x 768 */
+  .screen {
+    width: 1024px;
+    height: 768px;
+    background: var(--field);
+    border: 2px solid var(--ink);
+    border-top-color: var(--hi);
+    border-left-color: var(--hi);
+    border-right-color: var(--lo);
+    border-bottom-color: var(--lo);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: center center;
+  }
+
+  .content {
+    flex: 1 1 auto;
+    padding: 44px 48px 36px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* hero poem */
+  .poem {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.95;
+    color: #444;
+  }
+  .poem .big {
+    display: block;
+    font-size: 46px;
+    font-weight: bold;
+    line-height: 1.12;
+    margin-top: 10px;
+    color: #000;
+  }
+
+  .lead {
+    margin: 26px 0 0;
+    max-width: 640px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  /* install row: button + drag hint side by side */
+  .install {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 34px 0 4px;
+  }
+  a.grab {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    background: var(--paper);
+    padding: 14px 32px;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: grab;
+    border: 2px solid;
+    border-top-color: var(--hi);
+    border-left-color: var(--hi);
+    border-right-color: var(--lo);
+    border-bottom-color: var(--lo);
+    white-space: nowrap;
+  }
+  a.grab:active { cursor: grabbing; }
+  .drag-hint { font-size: 13px; color: #555; }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--hi);
+    margin: 34px 0 26px;
+  }
+
+  /* three instruction columns */
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+  }
+  .col h2 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin: 0 0 12px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--line);
+  }
+  ol { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; }
+  li { margin-bottom: 8px; }
+  code {
+    font-family: "Courier New", monospace;
+    background: #eee;
+    padding: 0 3px;
+    font-size: 12px;
+  }
+
+  .codebox { margin-top: 22px; }
+  summary { cursor: pointer; font-size: 12px; color: var(--link); }
+  pre {
+    background: #f4f4f4;
+    border: 1px solid var(--line);
+    padding: 8px;
+    margin: 8px 0 0;
+    font-family: "Courier New", monospace;
+    font-size: 10.5px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 84px;
+    overflow: auto;
+  }
+
+  /* footer strip */
+  .strip {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 11px;
+    color: #555;
+    background: #ffffcc;
+    border: 1px solid #d4d400;
+    padding: 10px 12px;
+    font-size: 12px;
+    margin-top: 28px;
+  }
+
+  .strip .note { color: #777; max-width: 560px; }
+  .strip .credit { white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div class="screen">
+    <div class="content">
+
+      <p class="lead">
+        A bookmarklet. Click it to enjoy the web in Verdana.
+        Verdana, 14&nbsp;pixels, no smoothing. Click again to undo.
+        Nothing installed, nothing tracked.
+      </p>
+
+      <div class="install">
+        <a class="grab" href="javascript:(function(){var i='verdana-bookmarklet-styles';var e=document.getElementById(i);if(e){e.remove();return;}var s=document.createElement('style');s.id=i;s.textContent='*{font-family:Verdana,Geneva,sans-serif !important;font-size:14px !important;-webkit-font-smoothing:none !important;-moz-osx-font-smoothing:unset !important;font-smooth:never !important;text-rendering:optimizeSpeed !important;}';document.head.appendChild(s);})();">there was Verdana</a>
+        <span class="drag-hint">&#11176; drag onto your bookmarks bar</span>
+      </div>
+
+      <hr>
+
+      <div class="cols">
+        <div class="col">
+          <h2>Chrome</h2>
+          <ol>
+            <li>Show the bookmarks bar: <code>Ctrl/Cmd + Shift + B</code>.</li>
+            <li>Drag the gray button onto it.</li>
+            <li>Click the bookmark on any site. Click again to switch off.</li>
+          </ol>
+        </div>
+        <div class="col">
+          <h2>Safari &middot; Mac</h2>
+          <ol>
+            <li>Dragging strips the code, so bookmark this page: <code>Cmd + D</code>.</li>
+            <li><strong>Bookmarks &rsaquo; Edit Bookmarks</strong>, rename it <em>there was Verdana</em>.</li>
+            <li>Right-click &rsaquo; <strong>Edit Address</strong>, paste the code &rarr;.</li>
+          </ol>
+        </div>
+        <div class="col">
+          <h2>Safari &middot; iPhone</h2>
+          <ol>
+            <li>Copy the code &rarr;.</li>
+            <li><strong>Share &rsaquo; Add Bookmark</strong> &rsaquo; Save.</li>
+            <li>Bookmarks &rsaquo; <strong>Edit</strong>, open it, paste the code as the address.</li>
+            <li>Run it: type the bookmark name in the address bar, select it.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="codebox">
+        <details>
+          <summary>Show the code (for Safari paste) &mdash; must start with <code>javascript:</code></summary>
+          <pre id="code">javascript:(function(){var i='verdana-bookmarklet-styles';var e=document.getElementById(i);if(e){e.remove();return;}var s=document.createElement('style');s.id=i;s.textContent='*{font-family:Verdana,Geneva,sans-serif !important;font-size:14px !important;-webkit-font-smoothing:none !important;-moz-osx-font-smoothing:unset !important;font-smooth:never !important;text-rendering:optimizeSpeed !important;}';document.head.appendChild(s);})();</pre>
+        </details>
+      </div>
+
+      <div class="strip">
+        <span class="note">Some sites block bookmarklets, and the effect resets on reload &mdash; normal for bookmarklets.</span>
+        <span class="credit">Verdana by Matthew Carter, bookmarklet by No Plans</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Scale the fixed 1024x768 frame down if the viewport is smaller,
+    // so the design itself never changes to fit a window.
+    (function () {
+      var screen = document.querySelector('.screen');
+      function fit() {
+        var scale = Math.min(1, (window.innerWidth - 24) / 1024, (window.innerHeight - 24) / 768);
+        screen.style.transform = scale < 1 ? 'scale(' + scale + ')' : 'none';
+      }
+      window.addEventListener('resize', fit);
+      fit();
+    })();
+  </script>
+</body>
+</html>
